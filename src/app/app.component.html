@@ -7,21 +7,71 @@
 
 
 <div class="courses">
+  <!-- Variante mit @ViewChild -->
+  <p>{{card.someWords}}</p>
+  <course-card #card [course]="rxjsCourse" > </course-card>
+  <!-- Variante mit html click -->
+  <course-card (click)="showAppComponent()" [course]="coreCourse" ></course-card>
+  <!-- Variante mit EventEmitter -->
+  <course-card (cardEvent)="fromChildToParent($event)" [course]="ngrxCourse" ></course-card>
 
-    <div class="course-card">
-
-        <div class="course-title">
-            Angular Core Deep Dive
-        </div>
-        <img width="300" alt="Angular Logo"
-             src="https://s3-us-west-1.amazonaws.com/angular-university/course-images/angular-core-in-depth-small.png">
-
-        <div class="course-description">
-            A detailed walk-through of the most important part of Angular - the Core and Common modules.
-        </div>
-
-    </div>
+  <h1>Show all courses with &#64;for</h1>
+  @for(course of allCourses; track course.id; let index = $index; let  last = $last; let first = $first;
+    let odd = $odd; let even = $even; let count = $count;) {
+    <course-card
+      [course]="course"
+      [index] = "index + 1"
+      [count]="count"
+      [class.is-first] = "first"
+      [class.is-last]="last"
+      [class.is-odd]="odd"
+      [class.is-even]="even"
+    />
+  } @empty {
+    <h1>No courses found!</h1>
+  }
 
 </div>
 
+<!-- Lesson ViewChild für Zugriff auf Komponentenebene/course-card -->
+<h2 style="text-align:center" >Section 3: Angular Local Template Querying in Depth</h2>
+<div #container class="courses" >
+  <div style="display: flex; justify-content: center;">
+    <button (click)="onCoursesEdited()" >EditCourses</button>
+  </div>
+  @for(course of allCourses; track course.id;){
+    <course-card  [course]="course" (cardEvent)="viewChildCardComponent($event)"  #cardRef #cardRefElementCourseCard >
+    </course-card>
+  }
+</div>
 
+
+<h2 style="text-align:center" >Section 4: Angular ng-template and TemplateRef</h2>
+<!-- 4.34 ToDo ng-content nutzen um nur bestimmte div container zu übernehmen via css class course-image and course-description-->
+<!-- ToDo extra <textarea> in app.component.html hinzufügen  warum wird dies nicht projeziert und wie kann ich das änder?-->
+
+<!-- 4.35ToDo use ViewChild in the course-card component and  #courseImage on app component to get the image value. Gebe den Wert in der ngAfterViewInit Methode aus-->
+<!-- ToDo use @ContentChild instead what is happing now?-->
+<!-- ToDo use a #courseImage on course-card level with @ContentChild in course-card and remove it from app.component.html what is happing now?-->
+
+<!-- 4.35 ToDo eigene Komponente course-image anlegen mit Vairable src als String und diese benutzen innerhalb der course-card on app.component.html so anpassen, dass es wieder angezeigt wird-->
+<!-- ToDo contentChild verwenden vom Typ Course-Image-Component nutze anschließend ElementRef und gib diese aus-->
+
+<!-- 4.36 ToDo use ContentChildren to get a list of children -->
+<!-- ToDo use ngAftercontentInit what is the difference between ngAfterViewInit and ngAfterInit -->
+<div >
+  @let course = allCourses[0];
+  @if(course){
+  <course-card class="courses"  [course]="course">
+    <course-image [srcInput] = course.iconUrl name="test"></course-image>
+    <course-image [srcInput]= allCourses[3].iconUrl></course-image>
+    <div class="course-description">
+      {{course.longDescription}}
+    </div>
+    <div>
+      <textarea>Ich bin eine textarea</textarea>
+    </div>
+  </course-card>
+
+  }
+</div>

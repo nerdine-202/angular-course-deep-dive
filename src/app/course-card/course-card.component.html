@@ -1,0 +1,35 @@
+<div class="course-card"
+    [ngClass]="cardClasses()">
+
+  <div  class="course-title">
+    {{index || '' }} {{course.description}}
+  </div>
+
+   <ng-content select=".course-description"></ng-content>
+    <ng-content select="img"></ng-content>
+    <ng-content select="course-image"></ng-content>
+    <ng-content></ng-content>
+    mein toller Text
+
+
+
+
+  <!--  @if(course.iconUrl){
+        <img width="300" alt="Angular Logo"
+             src="{{course.iconUrl}}">
+    }
+    @else if(course.id == 1){
+        <h2>das ist der erste Kurs</h2>
+    }
+    @else {
+        <h2>habe kein Icon</h2>
+    }-->
+
+
+
+
+  <button (click)="cardComponentClicked()">Click</button>
+  <p>{{index}} of {{count}}</p>
+
+
+</div>
