@@ -1,4 +1,7 @@
 
+> [!IMPORTANT]
+> to push to the private repo nerdine-202 use visual studio code (Intellij is linked to the company github)
+
 ##  Angular Core Deep Dive (Video Course)
 
 This repository contains the code of the [Angular Core Deep Dive](https://angular-university.io/course/angular-course).
