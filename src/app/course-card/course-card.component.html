@@ -5,10 +5,10 @@
     {{index || '' }} {{course.description}}
   </div>
 
-   <ng-content select=".course-description"></ng-content>
-    <ng-content select="img"></ng-content>
-    <ng-content select="course-image"></ng-content>
-    <ng-content></ng-content>
+  <ng-content select=".course-description"></ng-content>
+  <ng-content select="img"></ng-content>
+  <ng-content select="course-image"></ng-content>
+  <ng-content></ng-content>
     mein toller Text
 
 
@@ -28,7 +28,7 @@
 
 
 
-  <button (click)="cardComponentClicked()">Click</button>
+  <button (click)="cardButtonClicked()">Click</button>
   <p>{{index}} of {{count}}</p>
 
 

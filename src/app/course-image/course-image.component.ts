@@ -2,7 +2,7 @@ import {Component, input, Input, OnInit} from '@angular/core';
 
 @Component({
   selector: 'course-image',
-  imports: [],
+  standalone: false,
   templateUrl: './course-image.component.html',
   styleUrl: './course-image.component.css'
 })

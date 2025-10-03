@@ -16,9 +16,7 @@ import {CourseImageComponent} from '../course-image/course-image.component';
 
 @Component({
   selector: 'course-card',
-  imports: [
-    NgClass
-  ],
+  standalone: false,
   templateUrl: './course-card.component.html',
   styleUrl: './course-card.component.css'
 })
@@ -33,15 +31,11 @@ export class CourseCardComponent implements OnInit, AfterViewInit, AfterContentI
   })
   index:number;
 
-  @ContentChild('courseImage')
+  @ContentChildren('courseImage')
   image;
 
-  @ViewChild(CourseImageComponent)
-  image2;
-
-  @ContentChildren(CourseImageComponent, {read: ElementRef})
-  images: QueryList<ElementRef>;
-
+  @ContentChildren(CourseImageComponent)
+  images;
 
   @Input() count: number = 0;
 
@@ -49,24 +43,30 @@ export class CourseCardComponent implements OnInit, AfterViewInit, AfterContentI
   cardEmitter = new EventEmitter<Course>();
   someWords = "Hello Course Card Component World";
 
+  @ContentChildren(CourseImageComponent, {read: ElementRef})
+  imagesElementRef: QueryList<ElementRef>;
+
   ngOnInit(): void {
 
   }
 
   ngAfterViewInit() {
-    console.log('Image After View Init: ' + this.image)
-    console.log('Image After View Init image2: ' + this.image2)
+  //  console.log('Image After View Init: ', this.image)
+   // console.log(this.image)
+  //  console.log('Image After View Init images: ', this.images)
   }
 
   ngAfterContentInit(): void {
-    console.log('Image After ContentInit: ' + this.image)
-    console.log('Image After ContentInit image2: ' + this.image2)
-    console.log('Image After ContentInit images: ' + this.images)
+  //  console.log('Image After ContentInit: ', this.image)
+    //console.log('Image After ContentInit images: ', this.images)
   }
 
-  cardComponentClicked(){
-    console.log('Card component clicked', this.course);
+  cardButtonClicked(){
+    console.log('Card button clicked', this.course);
     this.cardEmitter.emit(this.course);
+    console.log('Image After Button clicked images: ', this.images)
+    console.log('Image After Button clicked image: ', this.image)
+    console.log('Image After Button clicked imagesElementRef: ', this.imagesElementRef)
   }
 
   cardClasses() {
